@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+
+
+>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/webjars/bootstrap/5.2.3/css/bootstrap.min.css">
+  <title>My Projet</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand text-white" href="/">Gestionnaire Scolaire ISM</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item" >
+          <a class="nav-link text-white" href="/liste-session-cours">Session Cours</a>
+        </li>
+        <li class="nav-item" >
+          <a class="nav-link text-white" href="/">Absences</a>
+        </li>
+
+
+
+
+      </ul>
+      <ul class="navbar-nav  mb-2 mb-lg-0">
+        <li class="nav-item float-end" >
+          <a class="nav-link text-white text-capitalize" aria-current="page"   >
+            <span th:remove="tag"  sec:authentication="name"></span>
+          </a>
+        </li>
+      </ul>
+
+      <form class="d-flex" method="post" th:action="@{/logout}">
+        <button class="btn btn-white text-white " type="submit">Deconnexion</button>
+      </form>
+
+
+
+
+
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="container mt-4">
+  <section layout:fragment="contentForView">
+    <!-- Le contenu de la section va ici -->
+  </section>
+  <footer class="bg-secondary py-3">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6">
+          <p class="text-white">© 2023 Mon Entreprise. Tous droits réservés.</p>
+        </div>
+        <div class="col-sm-6">
+          <ul class="list-inline text-end">
+            <li class="list-inline-item"><a href="#" class="text-black">Conditions générales</a></li>
+            <li class="list-inline-item"><a href="#" class="text-black">Politique de confidentialité</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</div>
+<script src="/webjars/bootstrap/5.2.3/js/bootstrap.bundle.js"></script>
+</body>
+</html>

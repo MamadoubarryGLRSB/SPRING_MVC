@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="template">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Cours du Professeur</title>
+</head>
+
+<body>
+<div class="container" layout:fragment="contentForView">
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <h1 class="text-center">Cours du Professeur</h1>
+        <hr>
+
+        <h1>Nom du Professeur: <span th:text="${professeur.nomComplet}"></span></h1>
+
+        <h4>Specialité: <span th:text="${professeur.specialites}"></span></h4>
+        <h4>Grade: <span th:text="${professeur.grades}"></span></h4>
+
+        <div class="float-start">
+          <a th:href="@{/professeur-cours(professeurId=${professeur.id}, filter='jour')}" class="btn btn-outline-primary">Filtrer par jour</a>
+          <a th:href="@{/professeur-cours(professeurId=${professeur.id}, filter='semaine')}" class="btn btn-outline-primary">Filtrer par semaine</a>
+          <a th:href="@{/professeur-cours(professeurId=${professeur.id})}" class="btn btn-outline-primary">Tous les cours</a>
+        </div>
+
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th scope="col">Nom du cours</th>
+            <th scope="col">Nombre d'heures</th>
+            <th scope="col">Action</th> <!-- Ajout de la colonne Action -->
+            <!-- Ajoutez d'autres colonnes selon vos besoins -->
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="sessionCours : ${sessionCours}">
+            <td th:text="${sessionCours.cours.nom}"></td>
+            <td th:text="${sessionCours.cours.nbreHeures}"></td>
+            <td>
+              <span th:text="${sessionCours.cours.nom}"></span>
+              <span th:if="${sessionCours.cours.annule}" class="badge bg-danger">Annulé</span>
+              <span th:unless="${sessionCours.cours.annule}" class="badge bg-success">Actif</span>
+            </td>
+            <td>
+              <form th:action="@{/demande-justification}" method="post">
+                <input type="hidden" name="coursId" th:value="${sessionCours.cours.id}" />
+                <input type="text" name="justification" placeholder="Justification" required />
+                <button type="submit" class="btn btn-danger">Demander annulation</button>
+              </form>
+            </td>
+            <td>
+              <form th:action="@{/annuler-demande}" method="post">
+                <input type="hidden" name="coursId" th:value="${sessionCours.cours.id}" />
+                <button type="submit" class="btn btn-secondary">Annuler</button>
+              </form>
+            </td>
+            <!-- Ajoutez d'autres colonnes selon vos besoins -->
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+
+</html>

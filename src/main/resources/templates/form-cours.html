@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="template">
+
+
+<head>
+  <meta charset="UTF-8">
+  <title>Planifier un cours</title>
+
+  <link rel="stylesheet"
+        href="/webjars/bootstrap/5.2.3/css/bootstrap.min.css">
+  <script
+          src="/webjars/bootstrap/5.2.3/js/bootstrap.bundle.js">
+  </script>
+</head>
+
+<body>
+<div class="container" layout:fragment="contentForView">
+
+  <h1 class="my-4 text-center">Planifier un cours</h1>
+  <div class="row justify-content-center">
+    <div class="col-lg-6">
+      <form action="#" th:action="@{/enregist-cours}" method="post" th:object="${cours}">
+        <div class="form-group">
+          <label for="semestre">Semestre:</label>
+          <select id="semestre" name="semestre.id" th:field="*{semestre.id}" class="form-control">
+            <option value="">Sélectionner un semestre</option>
+            <th:block th:each="semestre : ${semestreList}">
+              <option th:value="${semestre.id}" th:text="${semestre.libelle}"></option>
+            </th:block>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="nbreHeures" class="form-label">Nombre heure</label>
+          <input name="nbreHeures" th:value="${cours.nbreHeures}"
+                 type="text" class="form-control" id="nbreHeures" aria-describedby="nbreHeuresHelp">
+        </div>
+
+        <div class="form-group">
+          <label for="nom" class="form-label">Nom du Cours</label>
+          <input name="nom" th:value="${cours.nom}"
+                 type="text" class="form-control" id="nom" aria-describedby="nomHelp">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Enregistrer</button>
+      </form>
+    </div>
+  </div>
+</div>
+

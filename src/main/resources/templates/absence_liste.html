@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="template">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Liste des absences</title>
+</head>
+
+<body>
+<div class="container" layout:fragment="contentForView">
+  <div class="card mt-2">
+    <div class="card-header">
+      <h5>Mes Absences</h5>
+    </div>
+    <div class="card-body">
+
+
+
+      <table class="table table-bordered">
+        <thead>
+        <tr>
+          <th>Date</th>
+          <th>Motif</th>
+          <th>Justification</th>
+          <th>Actions</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="abs :${absences}">
+          <td th:text="${abs.date}"></td>
+          <td th:text="${abs.motif}"></td>
+          <td th:text="${abs.justification}"></td>
+
+
+          </td>
+          <td><a type="button" class="btn btn-sm btn-outline-success"
+
+          >Justification</a>
+
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <nav aria-label="Page navigation example">
+        <ul class="pagination float-end">
+          <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+          <li class="page-item" th:each="page,current:${pages}">
+            <a
+                    th:class="${currentPages==current.index ? 'page-link active': 'page-link'}"
+                    th:text="${current.index+1}"
+                    th:href="@{absences(page=${current.index})}"></a></li>
+
+          <li class="page-item"><a class="page-link" href="#" >Next</a></li>
+        </ul>
+      </nav>
+
+
+
+    </div>
+  </div>
+</div>
+</body>
+
+</html>

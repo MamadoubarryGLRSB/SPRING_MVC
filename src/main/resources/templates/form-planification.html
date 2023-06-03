@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="template">
+
+
+<head>
+    <meta charset="UTF-8">
+    <title>Planifier un cours</title>
+
+    <link rel="stylesheet"
+          href="/webjars/bootstrap/5.2.3/css/bootstrap.min.css">
+    <script
+            src="/webjars/bootstrap/5.2.3/js/bootstrap.bundle.js">
+    </script>
+</head>
+
+<body>
+<div class="container" layout:fragment="contentForView">
+    <h1>Planifier une Classe</h1>
+
+    <form action="/enregistrer-planification-classe" method="post">
+
+    <div class="form-group">
+            <label for="classe">Classe</label>
+            <select class="form-control" id="classe" name="classe">
+                <option value="">Choisir une classe</option>
+                <th:block th:each="classe: ${classes}">
+                    <option th:value="${classe.id}" th:text="${classe.niveau + ' ---' + classe.filiere}"></option>
+
+                </th:block>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="anneeScolaire">Annee Scolaire</label>
+            <select class="form-control" id="anneeScolaire" name="anneeScolaire">
+                <option value="">Choisir une Annee</option>
+                <th:block th:each="anneeScolaire: ${anneeScolaires}">
+                    <option th:value="${anneeScolaire.id}" th:text="${anneeScolaire.dateDebut + ' ---' +anneeScolaire.dateFin}"></option>
+
+                </th:block>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Planifier</button>
+    </form>
+
+
+
+</div>
+

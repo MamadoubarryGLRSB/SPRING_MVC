@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="template">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des sessions de cours</title>
+</head>
+
+<body>
+<div class="container" layout:fragment="contentForView">
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="text-center">Liste Annee scoalires</h1>
+                <hr>
+
+                <div class="float-end">
+                    <a th:href="@{/ajouter-annee-scolaire}" class="btn btn-outline-info">ADD</a>
+                </div>
+
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+
+
+                        <th scope="col">Date de début</th>
+                        <th scope="col">Date de fin</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="anneeS,iterStat : ${anneeScolaires}">
+                        <td th:text="${#temporals.format(anneeS.dateDebut, 'dd/MM/yyyy')}"></td>
+                        <td th:text="${#temporals.format(anneeS.dateFin, 'dd/MM/yyyy')}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

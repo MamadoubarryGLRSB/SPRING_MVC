@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="template">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Liste des sessions de cours</title>
+</head>
+
+<body>
+<div class="container" layout:fragment="contentForView">
+  <div class="card mt-2">
+    <div class="card-header">
+      <h5>Liste des Modules</h5>
+    </div>
+    <div class="card-body">
+      <div class="float-end">
+        <a th:href="@{/ajouter-module}" class="btn btn-outline-info">Ajouter</a>
+      </div>
+      <br>
+
+      <table class="table table-bordered">
+        <thead>
+        <tr>
+          <th>Libelle</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="module : ${modules}">
+          <td th:text="${module.libelle}"></td>
+
+        </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>
+</body>
+
+</html>

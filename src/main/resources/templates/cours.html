@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="template">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Liste des cours</title>
+</head>
+
+<body>
+<div class="container" layout:fragment="contentForView">
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <h1 class="text-center">Liste des cours</h1>
+        <hr>
+
+        <div class="float-end">
+          <a th:href="@{/planif-cours}" class="btn btn-outline-info">Ajouter</a>
+        </div>
+
+        <div class="float-end">
+          <a th:href="@{/liste-cours}" class="btn btn-outline-primary">Tous</a>
+        </div>
+
+        <div class="float-end">
+          <a th:href="@{/liste-cours?etat=En+Cours}" class="btn btn-outline-primary">En Cours</a>
+        </div>
+
+        <div class="float-end">
+          <a th:href="@{/liste-cours(etat='Terminé')}" class="btn btn-outline-primary">Terminé</a>
+        </div>
+
+
+        <table class="table table-striped">
+          <thead>
+          <tr>
+
+            <th scope="col">Nom du Cours</th>
+            <th scope="col">Nombre d'heure</th>
+            <th scope="col">Semestre</th>
+            <th scope="col">Etat</th>
+            <th scope="col">Actions</th>
+
+
+
+
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="cour: ${cours}">
+            <td th:text="${cour.nom}"></td>
+            <td th:text="${cour.nbreHeures}"></td>
+            <td th:text="${cour.semestre.libelle}"></td>
+            <td th:text="${cour.etat}"></td>
+            <td>
+              <form method="POST" th:action="@{/terminer}" style="display: inline">
+                <input type="hidden" name="sessionId" th:value="${cour.id}">
+                <button type="submit" class="btn btn-success">Terminé</button>
+              </form>
+
+              <form method="POST" th:action="@{/annuler}" style="display: inline">
+                <input type="hidden" name="sessionId" th:value="${cour.id}">
+                <button type="submit" class="btn btn-primary">Annuler</button>
+              </form>
+
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+
+</html>

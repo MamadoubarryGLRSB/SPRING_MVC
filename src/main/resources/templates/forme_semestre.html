@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="template">
+<head>
+    <meta charset="UTF-8">
+    <title>Planifier un semestre</title>
+
+    <link rel="stylesheet"
+          href="/webjars/bootstrap/5.2.3/css/bootstrap.min.css">
+    <script
+            src="/webjars/bootstrap/5.2.3/js/bootstrap.bundle.js">
+    </script>
+</head>
+
+
+<body>
+<div class="container" layout:fragment="contentForView">
+    <h1>Ajouter Semestre</h1>
+    <form action="#" th:action="@{/enregistrer-semestre}" method="post" th:object="${semestre}">
+
+
+        <div class="form-group">
+            <label for="libelle" class="form-label">Libelle</label>
+            <input name="libelle" th:value="${semestre.libelle}"
+                   type="text" class="form-control" id="libelle" aria-describedby="libelle">
+        </div>
+
+
+        <button type="submit" class="btn btn-primary">Enregistrer</button>
+    </form>
+</div>
+
